@@ -172,9 +172,9 @@ public struct MacOS: Platform {
         }
 
         let config = Configuration(
-            .path(FilePath((userHomeDir / ".swiftly/bin/swiftly").string)), arguments: ["init"]
+            executable: .path(FilePath((userHomeDir / ".swiftly/bin/swiftly").string)), arguments: ["init"]
         )
-        let result = try await run(config, input: .standardInput, output: .standardOutput, error: .standardError)
+        let result = try await run(config, input: .standardInput, output: .currentStandardOutput, error: .currentStandardError)
         if !result.terminationStatus.isSuccess {
             throw RunProgramError(terminationStatus: result.terminationStatus, config: config)
         }

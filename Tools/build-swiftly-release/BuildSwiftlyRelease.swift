@@ -178,7 +178,7 @@ struct BuildSwiftlyRelease: AsyncParsableCommand {
         let swiftVerRegex: Regex<(Substring, Substring)> = try! Regex("Swift version (\\d+\\.\\d+\\.?\\d*) ")
 
         let swiftVersionCmd = Configuration(
-            .name("swift"),
+            executable: .name("swift"),
             arguments: ["--version"]
         )
         print("\(swiftVersionCmd.executable) \(swiftVersionCmd.arguments)")
@@ -237,7 +237,7 @@ struct BuildSwiftlyRelease: AsyncParsableCommand {
         ])
 
         let configCmd = Configuration(
-            .path(FilePath("./configure")),
+            executable: .path(FilePath("./configure")),
             arguments: [
                 "--prefix=\(pkgConfigPath)",
                 "--enable-shared=no",

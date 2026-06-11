@@ -270,7 +270,7 @@ public struct CommandLineTests {
     func testSwift() async throws {
         let tmp = fs.mktemp()
         try await fs.mkdir(atPath: tmp)
-        let swiftExec: Executable = .path(try Executable.name("swift").resolveExecutablePath(in: .inherit))
+        let swiftExec: Executable = .path(try await Executable.name("swift").resolveExecutablePath(in: .inherit))
         try await sys.swift(executable: swiftExec).package()._init(.package_path(tmp), .type("executable")).run()
         try await sys.swift(executable: swiftExec).build(.package_path(tmp), .configuration("release")).run()
     }
